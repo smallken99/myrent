@@ -15,7 +15,7 @@
         <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
 
 	<script type="text/javascript">
-    	 var url = "http://smallken.com/";
+    	 var url = "http://192.168.8.100/";
         </script>
 
         <script src="/myrent/js/elec-ajax.js"></script>
