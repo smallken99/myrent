@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +15,7 @@
         <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
 
 	<script type="text/javascript">
-    	 var url = "http://192.168.1.109";
+    	 var url = "http://192.168.8.100/";
         </script>
 
         <script src="/myrent/js/item-ajax.js"></script>
@@ -36,7 +36,7 @@
 		        <div class="pull-right">
 				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#create-item">
 					  新增租約
-				</button>
+				</button>	
 		        </div>
 		    </div>
 		</div>
@@ -267,7 +267,30 @@
 		  </div>
 		</div>
 	   </div>	   
-	   
+
+		<!-- List Cust Data -->
+		<div class="modal fade" id="cus_data" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+		        <h4 class="modal-title" id="myModalLabel">房客基本資料</h4>
+		      </div>
+
+		      <div class="modal-body">
+				<table class="table table-bordered">
+				    <div id="CUSMER"></div> 
+					<tbody class="CusTbody">
+					</tbody>
+			    </table>
+
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	   </div>	   
+
+
 	</div>
 </body>
 </html>
