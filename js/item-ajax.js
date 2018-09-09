@@ -74,7 +74,7 @@ function manageRow(data) {
 		var isEnd = calculateDate(value.END_DATE);
 		console.log(isEnd);
 	  	rows = rows + '<tr>';
-	  	rows = rows + '<td>'+value.ROOM + " " + value.NAME+'</td>';
+	  	rows = rows + '<td  data-toggle="modal" data-target="#cus_data" class="cus_data"><a href="#">'+value.ROOM + " " + value.NAME+'</a></td>';
 	  	rows = rows + '<td style="display:none">'+value.BEGIN_DATE+'</td>';
 	if(isEnd){
 		rows = rows + '<td style="color:red">'+value.END_DATE+'</td>';
@@ -147,6 +147,7 @@ $("body").on("click",".remove-item",function(){
     });
 
 });
+
 
 /* 新增繳費紀錄 */
 $("body").on("click",".ins-item",function(){
@@ -364,6 +365,38 @@ $(".crud-submit-edit").click(function(e){
 
 });
 
+/* list 客戶基本資料  */
+$("body").on("click",".cus_data",function(){
+	var CUSMER = $(this).text();
+	var ROOM = CUSMER.substring(0,2);
+	var BEGIN_DATE = $(this).next("td").text();
+	console.log('ROOM:' + ROOM);	
+	console.log('BEGIN_DATE:' + BEGIN_DATE);
+
+   $.ajax({
+        dataType: 'json',
+        type:'POST',
+        url: url + 'myrent/api/getCusData.php',
+        data:{ROOM:ROOM,BEGIN_DATE:BEGIN_DATE}
+    }).done(function(data){
+ 		console.log("data ok:" + data.data[0].ROOM);
+ 		rows = "<ul><li>房號: "+ data.data[0].ROOM + "</li>";
+ 		rows = rows + "<li>租約起始日: "+ data.data[0].BEGIN_DATE+ "</li>";
+ 		rows = rows + "<li>房客姓名: "+ data.data[0].NAME+ "</li>";
+ 		rows = rows + "<li>租約到期日: "+ data.data[0].END_DATE+ "</li>";
+ 		rows = rows + "<li>每月租金: "+ data.data[0].RENT_AMT.split(".")[0]+ "</li>";
+ 		rows = rows + "<li>押金: "+ data.data[0].DIPOSIT.split(".")[0]+ "</li>";
+ 		rows = rows + "<li>公共電表: "+ data.data[0].PUB_DASHBOARD + "</li>";
+ 		rows = rows + "<li>目前電表度數: "+ data.data[0].THIS_DEGREES.split(".")[0] + "</li>";
+ 		rows = rows + "<li>每度電費: "+ data.data[0].TIMES + "</li>";
+ 		rows = rows + "<li>手機號碼: "+ data.data[0].CELL_PHONE+ "</li>"; 		
+ 		rows = rows + "<li>地址: "+ data.data[0].ADDRESS + "</li>";
+ 		rows = rows + "</ul>";
+        $(".CusTbody").html(rows);
+    });
+
+});
+
 /* List Item 繳費紀錄*/
 $("body").on("click",".list-item",function(){
 	var CUSMER = $(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
@@ -376,8 +409,7 @@ $("body").on("click",".list-item",function(){
         url: url + 'myrent/api/getList.php',
         data:{ROOM:ROOM}
     }).done(function(data){
- 
-        manageListRow(data.data); 
+         manageListRow(data.data); 
     }); 
 
 });
