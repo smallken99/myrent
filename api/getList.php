@@ -5,7 +5,10 @@ require 'db_config.php';
 
 
 $ROOM = $_POST["ROOM"];
- 
+
+if($ROOM ==''){
+$ROOM = $_GET["ROOM"];
+} 
 
 $sql = "SELECT * FROM `DTSF02` where `ROOM` = '".$ROOM."' Order By  INPUT_DATE DESC "; 
 
