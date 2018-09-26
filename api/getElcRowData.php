@@ -3,7 +3,7 @@ require 'db_config.php';
 
  
 
-
+//µù¸Ñ
 $ROOM = $_GET["ROOM"];
 $INPUT_DATE = $_GET['INPUT_DATE'];
 
